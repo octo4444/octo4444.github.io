@@ -3,221 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>0cto — Portfolio CTF</title>
-  <meta name="description" content="Portfolio CTF d'Octave Le Gratiet (0cto) : Top 2 France CTFtime avec spYCTF, membre de CaenHackYou.">
+  <title>Octave Le Gratiet (0cto)</title>
+  <meta name="description" content="Octave Le Gratiet, alias 0cto. Joueur de CTF, équipe spYCTF et association CaenHackYou.">
   <style>
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #3fb950;
-      --gold: #e3b341;
+      --bg: #0b0e13;
+      --surface: #12161d;
+      --line: #232a35;
+      --text: #e8ecf1;
+      --muted: #8a94a3;
+      --accent: #4ade80;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
-      padding: 0 16px;
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 56px 0 40px; }
-    .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+    main { max-width: 760px; margin: 0 auto; padding: 64px 20px 48px; }
+    a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+    a:hover { border-color: var(--accent); }
 
-    header { margin-bottom: 48px; }
-    .prompt { color: var(--accent); font-size: 0.9rem; margin-bottom: 8px; }
-    h1 { font-size: 2.4rem; line-height: 1.2; }
-    h1 span { color: var(--muted); font-weight: 400; font-size: 1.2rem; display: block; margin-top: 4px; }
-    .tagline { color: var(--muted); margin-top: 16px; }
-    .tagline strong { color: var(--text); }
+    header { padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+    .handle { font-family: ui-monospace, Menlo, Consolas, monospace; color: var(--accent); font-size: 14px; }
+    h1 { font-size: 34px; line-height: 1.2; margin: 6px 0 10px; letter-spacing: -0.02em; }
+    .role { color: var(--muted); margin: 0; }
+    .links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 18px; font-size: 15px; }
 
+    section { margin-top: 44px; }
     h2 {
-      font-size: 0.85rem;
+      font-size: 13px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      margin: 48px 0 16px;
-    }
-
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-    }
-    .stat b { display: block; font-size: 1.6rem; color: var(--gold); }
-    .stat small { color: var(--muted); font-size: 0.85rem; }
-
-    .result {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 10px;
-    }
-    .rank {
-      min-width: 76px;
-      text-align: center;
-      font-weight: 700;
-      color: var(--gold);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 4px;
-      font-size: 0.95rem;
-    }
-    .result h3 { font-size: 1.05rem; }
-    .result p { color: var(--muted); font-size: 0.9rem; }
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 1px 8px;
-      margin: 6px 6px 0 0;
+      letter-spacing: 0.08em;
       color: var(--muted);
+      margin: 0 0 16px;
     }
 
-    .teams { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .team { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-    .team h3 { font-size: 1rem; }
-    .team p { color: var(--muted); font-size: 0.9rem; }
+    .highlights { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .highlights div { background: var(--surface); padding: 18px 16px; }
+    .highlights strong { display: block; font-size: 22px; letter-spacing: -0.01em; }
+    .highlights span { color: var(--muted); font-size: 13px; }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    th { text-align: left; font-weight: 500; color: var(--muted); font-size: 13px; padding: 0 12px 10px 0; border-bottom: 1px solid var(--line); }
+    td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    td.rank { font-weight: 600; white-space: nowrap; color: var(--accent); width: 90px; }
+    td small { display: block; color: var(--muted); font-size: 13px; }
+    td.team { color: var(--muted); white-space: nowrap; }
 
-    .about p { margin-bottom: 10px; }
+    .teams { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .teams div { border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    .teams strong { display: block; margin-bottom: 4px; }
+    .teams p { margin: 0; color: var(--muted); font-size: 14px; }
 
-    .btn {
-      display: inline-block;
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      padding: 8px 16px;
-      margin-right: 8px;
-      margin-top: 4px;
-    }
-    .btn:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+    footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
 
-    footer { margin-top: 56px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); padding-top: 16px; }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 1.9rem; }
-      .result { flex-direction: column; gap: 8px; }
-      .rank { min-width: 0; align-self: flex-start; padding: 4px 10px; }
+    @media (max-width: 640px) {
+      main { padding-top: 44px; }
+      h1 { font-size: 28px; }
+      .highlights, .teams { grid-template-columns: 1fr 1fr; }
+      .teams { grid-template-columns: 1fr; }
+      thead { display: none; }
+      tr { display: grid; grid-template-columns: 76px 1fr; border-bottom: 1px solid var(--line); padding: 12px 0; }
+      td { border: 0; padding: 0; }
+      td.rank { width: auto; }
+      td.team { grid-column: 2; white-space: normal; font-size: 13px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+<main>
 
-    <header>
-      <p class="prompt mono">$ whoami</p>
-      <h1>0cto <span>Octave Le Gratiet</span></h1>
-      <p class="tagline">
-        Joueur de CTF · Terminale <strong>STI2D SIN</strong> · Membre de <strong>CaenHackYou</strong><br></strong>.
-      </p>
-    </header>
+  <header>
+    <div class="handle">0cto</div>
+    <h1>Octave Le Gratiet</h1>
+    <p class="role">Joueur de CTF · spYCTF · CaenHackYou</p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/octave-le-gratiet-241247398/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/octo4444" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://ctftime.org/user/247484" target="_blank" rel="noopener">CTFtime</a>
+    </div>
+  </header>
 
-    <section>
-      <h2 class="mono">// En bref</h2>
-      <div class="stats">
-        <div class="stat"><b>Top 2</b><small>France sur CTFtime (2026)</small></div>
-        <div class="stat"><b>Top 5</b><small>BreizhCTF</small></div>
-        <div class="stat"><b>Top 11</b><small>Opération Culot · Bpifrance</small></div>
-        <div class="stat"><b>Top 16</b><small>Deep Threats · DGA</small></div>
+  <section>
+    <h2>Chiffres clés</h2>
+    <div class="highlights">
+      <div><strong>2<sup>e</sup></strong><span>France, CTFtime 2026</span></div>
+      <div><strong>1<sup>er</sup></strong><span>BYUCTF 2026</span></div>
+      <div><strong>Top 5</strong><span>BreizhCTF</span></div>
+      <div><strong>Top 16</strong><span>Deep Threats, DGA</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Résultats</h2>
+    <table>
+      <thead>
+        <tr><th>Place</th><th>Compétition</th><th>Équipe</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rank">2<sup>e</sup> FR</td>
+          <td>Classement CTFtime 2026<small>112<sup>e</sup> au classement mondial</small></td>
+          <td class="team">spYCTF</td>
+        </tr>
+        <tr>
+          <td class="rank">1<sup>er</sup></td>
+          <td>BYUCTF 2026<small>En ligne</small></td>
+          <td class="team">spYCTF</td>
+        </tr>
+        <tr>
+          <td class="rank">Top 5</td>
+          <td>BreizhCTF<small>Rennes, sur site · 118 équipes</small></td>
+          <td class="team">CyberCareCTF</td>
+        </tr>
+        <tr>
+          <td class="rank">Top 5</td>
+          <td>CyberNinjaCTF, finale<small>Sur site</small></td>
+          <td class="team">Lionsehr</td>
+        </tr>
+        <tr>
+          <td class="rank">8<sup>e</sup></td>
+          <td>HeroCTF v7<small>En ligne</small></td>
+          <td class="team">spYCTF</td>
+        </tr>
+        <tr>
+          <td class="rank">Top 11</td>
+          <td>Opération Culot<small>Bpifrance · OSINT · En ligne</small></td>
+          <td class="team">CaenFindYou</td>
+        </tr>
+        <tr>
+          <td class="rank">Top 16</td>
+          <td>Deep Threats 2026<small>DGA, Campus OSINT · En ligne · 361 équipes</small></td>
+          <td class="team">CaenHackYou</td>
+        </tr>
+        <tr>
+          <td class="rank">22<sup>e</sup></td>
+          <td>KalmarCTF 2026<small>En ligne</small></td>
+          <td class="team">spYCTF</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Équipes</h2>
+    <div class="teams">
+      <div>
+        <strong><a href="https://ctftime.org/team/415636" target="_blank" rel="noopener">spYCTF</a></strong>
+        <p>Équipe CTF en ligne</p>
       </div>
-    </section>
-
-    <section>
-      <h2 class="mono">// Résultats</h2>
-
-      <div class="result">
-        <div class="rank mono">#2 FR</div>
-        <div>
-          <h3>Classement national CTFtime 2026</h3>
-          <p>Avec l'équipe spYCTF, 2<sup>e</sup> équipe française et 112<sup>e</sup> mondiale sur la saison 2026, après une 21<sup>e</sup> place française en 2025.</p>
-          <span class="tag">équipe spYCTF</span>
-          <a class="tag" href="https://ctftime.org/team/415636" target="_blank" rel="noopener">voir sur CTFtime →</a>
-        </div>
+      <div>
+        <strong><a href="https://caenhackyou.fr" target="_blank" rel="noopener">CaenHackYou</a></strong>
+        <p>Association de cybersécurité, Caen</p>
       </div>
-
-      <div class="result">
-        <div class="rank mono">Top 5</div>
-        <div>
-          <h3>BreizhCTF</h3>
-          <p>L'un des plus grands CTF en présentiel de France, à Rennes.</p>
-          <span class="tag">équipe CyberCareCTF</span>
-        </div>
+      <div>
+        <strong>CyberCareCTF</strong>
+        <p>BreizhCTF</p>
       </div>
-
-      <div class="result">
-        <div class="rank mono">Top 11</div>
-        <div>
-          <h3>Opération Culot — Bpifrance</h3>
-          <p>Challenge spécialisé en OSINT (renseignement en sources ouvertes).</p>
-          <span class="tag">équipe CaenFindYou</span>
-          <span class="tag">OSINT</span>
-        </div>
+      <div>
+        <strong>Lionsehr</strong>
+        <p>Finale CyberNinjaCTF</p>
       </div>
+    </div>
+  </section>
 
-      <div class="result">
-        <div class="rank mono">Top 16</div>
-        <div>
-          <h3>Deep Threats 2026 — DGA</h3>
-          <p>CTF OSINT organisé par le Campus OSINT de la Direction générale de l'armement, sur 361 équipes. Enquête sur une menace visant une entreprise de la défense.</p>
-          <span class="tag">équipe CaenHackYou</span>
-          <span class="tag">OSINT</span>
-        </div>
-      </div>
+  <footer>© 2026 Octave Le Gratiet</footer>
 
-      <div class="result">
-        <div class="rank mono">1<sup>er</sup></div>
-        <div>
-          <h3>BYUCTF 2026</h3>
-          <p>Victoire avec spYCTF. Autres résultats : 8<sup>e</sup> à HeroCTF v7, 22<sup>e</sup> à KalmarCTF 2026.</p>
-          <span class="tag">équipe spYCTF</span>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="mono">// Équipes</h2>
-      <div class="teams">
-        <div class="team">
-          <h3>spYCTF</h3>
-          <p>Équipe principale en ligne, 2<sup>e</sup> en France sur CTFtime.</p>
-          <a href="https://ctftime.org/team/415636" target="_blank" rel="noopener">CTFtime →</a>
-        </div>
-        <div class="team">
-          <h3>CaenHackYou</h3>
-          <p>Association de cybersécurité basée à Caen. Équipes CaenHackYou et CaenFindYou (OSINT).</p>
-          <a href="https://caenhackyou.fr" target="_blank" rel="noopener">caenhackyou.fr →</a>
-        </div>
-        <div class="team">
-          <h3>CyberCareCTF</h3>
-          <p>Équipe du Top 5 au BreizhCTF.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="about">
-      <h2 class="mono">// À propos</h2>
-      <p>Je suis en Terminale STI2D option SIN et je fais des CTF en équipe en parallèle du lycée, en ligne comme en présentiel, avec un goût particulier pour l'OSINT.</p>
-      <p>Je souhaite poursuivre en Bachelor Cyberdéfense à l'EPITA pour faire de la cybersécurité mon métier.</p>
-    </section>
-
-    <section>
-      <h2 class="mono">// Contact</h2>
-      <a class="btn" href="https://www.linkedin.com/in/octave-le-gratiet-241247398/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://ctftime.org/user/247484" target="_blank" rel="noopener">CTFtime</a>
-    </section>
-
-    <footer class="mono">© 2026 0cto · fait avec un simple fichier HTML</footer>
-  </div>
+</main>
 </body>
 </html>
